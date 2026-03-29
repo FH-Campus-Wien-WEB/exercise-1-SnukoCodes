@@ -1,0 +1,33 @@
+body {
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+img {
+    border-radius: 8px;
+    max-width: 300px;
+}
+
+h1 {
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+article {
+    background-color: #757575;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+span {
+    margin-right: 0.4rem;
+}
+
+span.genre {
+    background-color: #726d6d;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #555;
+    display: inline-block;
+}

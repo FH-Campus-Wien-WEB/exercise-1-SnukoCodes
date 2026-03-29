@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies!</title>
-    <style>
-        /* Part 3: Your styling goes here */
-    </style>
+    <link rel="stylesheet" href="index.css">
     <script>
         function reverseString(s) {
             return s.split("").reverse().join("");
@@ -18,8 +16,45 @@
             xhr.onload = function () {
                 const bodyElement = document.querySelector("body")
                 if (xhr.status == 200) {
-		            /* Part 2: Build the HTML elements here and append them to the body */ 
-                    bodyElement.append(reverseString(xhr.responseText))
+                    /* Part 2: Build the HTML elements here and append them to the body */
+                    const movies = JSON.parse(xhr.responseText)
+                    movies.forEach(movie => {
+                        const movieElement = document.createElement("article")
+                        movieElement.innerHTML = `
+                        <header>
+                            <h2>${movie.title}</h2>
+                        </header>
+                        <figure>
+                            <img src="${movie.poster}" alt="Poster of ${movie.title}">
+                        </figure>
+                        <section>
+                            <p><strong>Release Date:</strong> ${new Date(movie.released).toLocaleDateString()}</p>
+                            <p><strong>Runtime:</strong> ${movie.runtime}min</p>
+                            <p><strong>IMDb Rating:</strong> ${movie.imdbRating}</p>
+                            <p><strong>Genres:</strong> ${movie.genres.map(g => `<span class="genre">${g}</span>`).join("")}</p>
+                            <p>${movie.plot}</p>
+                        </section>
+                        <section>
+                            <header>
+                                <h3>Directors</h3>
+                            </header>
+                            <ul>${movie.directors.map(d => `<li>${d}</li>`).join("")}</ul>
+                        </section>
+                        <section>
+                            <header>
+                                <h3>Writers</h3>
+                            </header>
+                            <ul>${movie.writers.map(w => `<li>${w}</li>`).join("")}</ul>
+                        </section>
+                        <section>
+                            <header>
+                                <h3>Actors</h3>
+                            </header>
+                            <ul>${movie.actors.map(a => `<li>${a}</li>`).join("")}</ul>
+                        </section>
+                        `
+                        bodyElement.appendChild(movieElement)
+                    })
                 } else {
                     bodyElement.append("Daten konnten nicht geladen werden, Status " + xhr.status + " - " + xhr.statusText)
                 }
